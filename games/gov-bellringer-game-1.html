@@ -72,35 +72,41 @@
         <div class="msg good" style="max-width:760px;margin:0 auto 14px;">
           <strong>Mastery achieved.</strong> Perfect run earned. Show your submit ticket.
         </div>
+
+        <div class="ticket">
+          <h2 style="margin-top:0;">Submit Ticket</h2>
+          <div class="ticket-grid">
+            <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
+            <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
+            <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
+            <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
+            <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
+            <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
+            <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
+            <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">Perfect Run</span></div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
       </div>
 
       <div id="masteryFail" class="hidden">
         <div class="msg bad" style="max-width:760px;margin:0 auto 14px;">
-          <strong>Mastery required.</strong> You must complete the game with 100% accuracy and zero misses to earn a submit ticket.
+          <strong>No ticket issued.</strong> A submit ticket is generated only for a perfect run with zero misses.
         </div>
-      </div>
-
-      <div class="ticket">
-        <h2 style="margin-top:0;">Submit Ticket</h2>
-        <div class="ticket-grid">
-          <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
-          <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
-          <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
-          <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
-          <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
-          <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
-          <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
-          <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">See mastery message above</span></div>
+        <div class="msg warn" style="max-width:760px;margin:0 auto 14px;">
+          Mastery required — restart and complete the game at 100% on the first try for every question.
         </div>
-      </div>
-
-      <div class="btn-row" style="justify-content:center;">
-        <a class="btn secondary" href="../index.html">Back to Hub</a>
-        <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
       </div>
     </section>
-  </div>
-  <script>
+<script>
 const QUESTIONS = [{"stem": "Which activity best represents participation in the public policy process?", "choices": [{"label": "A.", "text": "Voting in a general election", "correct": false}, {"label": "B.", "text": "Drafting and implementing a government regulation", "correct": true}, {"label": "C.", "text": "Campaigning for a political candidate", "correct": false}, {"label": "D.", "text": "Joining a political party", "correct": false}], "hint": "Focus on direct government action connected to creating or carrying out policy.", "explanation": "Drafting and implementing a regulation is part of the public policy process because it directly shapes how government acts."}, {"stem": "Which step is MOST essential when students are identifying a civic issue for engagement?", "choices": [{"label": "A.", "text": "Selecting a political party", "correct": false}, {"label": "B.", "text": "Identifying the level of government involved", "correct": true}, {"label": "C.", "text": "Writing legislation", "correct": false}, {"label": "D.", "text": "Contacting the media", "correct": false}], "hint": "Before acting, students need to know where the issue belongs.", "explanation": "Identifying the level of government involved helps citizens target the right officials and institutions."}, {"stem": "Examining costs and benefits of a proposed solution is most directly connected to:", "choices": [{"label": "A.", "text": "Devise an action plan", "correct": false}, {"label": "B.", "text": "Debate opposing viewpoints", "correct": false}, {"label": "C.", "text": "Weighing consequences of solutions", "correct": true}, {"label": "D.", "text": "Acquiring governmental power", "correct": false}], "hint": "Think about evaluating outcomes before deciding on a solution.", "explanation": "Weighing consequences means comparing likely costs and benefits before selecting a course of action."}, {"stem": "A key difference between political parties and interest groups is that political parties:", "choices": [{"label": "A.", "text": "Focus on influencing public opinion", "correct": false}, {"label": "B.", "text": "Seek to win elections and hold office", "correct": true}, {"label": "C.", "text": "Represent only economic interests", "correct": false}, {"label": "D.", "text": "Operate independently of elections", "correct": false}], "hint": "One group type tries to control government directly by winning offices.", "explanation": "Political parties aim to win elections and hold office, while interest groups mainly try to influence those in office."}, {"stem": "Interest groups primarily attempt to influence government by:", "choices": [{"label": "A.", "text": "Controlling voter registration", "correct": false}, {"label": "B.", "text": "Enforcing laws", "correct": false}, {"label": "C.", "text": "Engaging political and public policy processes", "correct": true}, {"label": "D.", "text": "Appointing government officials", "correct": false}], "hint": "Their main role is influence, not direct governing power.", "explanation": "Interest groups work through lobbying, advocacy, and other participation in political and public policy processes."}, {"stem": "Why do political parties and interest groups rely heavily on media?", "choices": [{"label": "A.", "text": "Media determines election outcomes", "correct": false}, {"label": "B.", "text": "Media allows direct control of public policy", "correct": false}, {"label": "C.", "text": "Media helps influence public opinion and decision-making", "correct": true}, {"label": "D.", "text": "Media replaces political participation", "correct": false}], "hint": "Think about shaping what people know and believe.", "explanation": "Media helps parties and groups communicate ideas, persuade audiences, and affect public opinion and decisions."}, {"stem": "Which factor is MOST important when evaluating the credibility of a source?", "choices": [{"label": "A.", "text": "Popularity of the source", "correct": false}, {"label": "B.", "text": "Agreement with personal opinion", "correct": false}, {"label": "C.", "text": "Use of evidence and logical conclusions", "correct": true}, {"label": "D.", "text": "Emotional language", "correct": false}], "hint": "Credibility depends on quality of reasoning and support.", "explanation": "A credible source uses evidence and reaches conclusions logically rather than relying on popularity or emotion."}, {"stem": "A source is LESS credible if it:", "choices": [{"label": "A.", "text": "Identifies the author’s perspective", "correct": false}, {"label": "B.", "text": "Uses supporting evidence", "correct": false}, {"label": "C.", "text": "Shows clear bias without justification", "correct": true}, {"label": "D.", "text": "Agrees with other reliable sources", "correct": false}], "hint": "Watch for unsupported bias.", "explanation": "A source loses credibility when it shows obvious bias without sound evidence or reasoning to support its claims."}, {"stem": "Why is identifying the perspective of a source important?", "choices": [{"label": "A.", "text": "It eliminates disagreement", "correct": false}, {"label": "B.", "text": "It helps detect bias and assumptions", "correct": true}, {"label": "C.", "text": "It guarantees accuracy", "correct": false}, {"label": "D.", "text": "It ensures neutrality", "correct": false}], "hint": "Perspective matters because it affects how information is presented.", "explanation": "Recognizing perspective helps readers detect possible bias, assumptions, and slant in a source."}];
 
 const state = {
