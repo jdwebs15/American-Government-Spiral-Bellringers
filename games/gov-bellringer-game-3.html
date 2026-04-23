@@ -72,35 +72,41 @@
         <div class="msg good" style="max-width:760px;margin:0 auto 14px;">
           <strong>Mastery achieved.</strong> Perfect run earned. Show your submit ticket.
         </div>
+
+        <div class="ticket">
+          <h2 style="margin-top:0;">Submit Ticket</h2>
+          <div class="ticket-grid">
+            <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
+            <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
+            <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
+            <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
+            <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
+            <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
+            <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
+            <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">Perfect Run</span></div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
       </div>
 
       <div id="masteryFail" class="hidden">
         <div class="msg bad" style="max-width:760px;margin:0 auto 14px;">
-          <strong>Mastery required.</strong> You must complete the game with 100% accuracy and zero misses to earn a submit ticket.
+          <strong>No ticket issued.</strong> A submit ticket is generated only for a perfect run with zero misses.
         </div>
-      </div>
-
-      <div class="ticket">
-        <h2 style="margin-top:0;">Submit Ticket</h2>
-        <div class="ticket-grid">
-          <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
-          <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
-          <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
-          <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
-          <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
-          <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
-          <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
-          <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">See mastery message above</span></div>
+        <div class="msg warn" style="max-width:760px;margin:0 auto 14px;">
+          Mastery required — restart and complete the game at 100% on the first try for every question.
         </div>
-      </div>
-
-      <div class="btn-row" style="justify-content:center;">
-        <a class="btn secondary" href="../index.html">Back to Hub</a>
-        <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
       </div>
     </section>
-  </div>
-  <script>
+<script>
 const QUESTIONS = [{"stem": "Which example best illustrates how Supreme Court decisions have changed constitutional government?", "choices": [{"label": "A.", "text": "Congress passing tax legislation", "correct": false}, {"label": "B.", "text": "The Court interpreting constitutional provisions in new contexts", "correct": true}, {"label": "C.", "text": "States enforcing election laws", "correct": false}, {"label": "D.", "text": "Voters approving constitutional amendments", "correct": false}], "hint": "Think about how constitutional meaning can change through interpretation.", "explanation": "Supreme Court decisions shape constitutional government by interpreting constitutional provisions in new situations."}, {"stem": "Civil Rights Acts and Voting Rights Acts are examples of constitutional change through:", "choices": [{"label": "A.", "text": "Informal practices", "correct": false}, {"label": "B.", "text": "Judicial review", "correct": false}, {"label": "C.", "text": "Congressional legislation", "correct": true}, {"label": "D.", "text": "Executive orders", "correct": false}], "hint": "These changes came through laws passed by the legislative branch.", "explanation": "Civil Rights Acts and Voting Rights Acts are examples of constitutional change through congressional legislation."}, {"stem": "Legislative oversight of the executive branch is best described as:", "choices": [{"label": "A.", "text": "A formal amendment process", "correct": false}, {"label": "B.", "text": "An informal practice not explicitly outlined in the Constitution", "correct": true}, {"label": "C.", "text": "A judicial power", "correct": false}, {"label": "D.", "text": "A state-level authority", "correct": false}], "hint": "It is common and important, but not spelled out directly in the Constitution.", "explanation": "Legislative oversight is an informal constitutional practice used by Congress to monitor the executive branch."}, {"stem": "Which scenario best reflects the protection against unreasonable search and seizure?", "choices": [{"label": "A.", "text": "Police searching a home without probable cause", "correct": true}, {"label": "B.", "text": "Congress passing a tax law", "correct": false}, {"label": "C.", "text": "A jury delivering a verdict", "correct": false}, {"label": "D.", "text": "A governor vetoing legislation", "correct": false}], "hint": "Look for the answer involving search standards and probable cause.", "explanation": "The Fourth Amendment protects people against unreasonable searches and seizures, including searches without probable cause."}, {"stem": "The right to confront one’s accuser is protected by the:", "choices": [{"label": "A.", "text": "1st Amendment", "correct": false}, {"label": "B.", "text": "4th Amendment", "correct": false}, {"label": "C.", "text": "5th Amendment", "correct": false}, {"label": "D.", "text": "6th Amendment", "correct": true}], "hint": "This right belongs to the trial rights amendment.", "explanation": "The Sixth Amendment guarantees the right to confront witnesses and accusers in criminal prosecutions."}, {"stem": "The 10th Amendment primarily emphasizes:", "choices": [{"label": "A.", "text": "Individual freedoms", "correct": false}, {"label": "B.", "text": "Judicial authority", "correct": false}, {"label": "C.", "text": "Reserved powers of the states and the people", "correct": true}, {"label": "D.", "text": "Federal supremacy", "correct": false}], "hint": "Think reserved powers.", "explanation": "The Tenth Amendment stresses that powers not given to the federal government are reserved to the states or the people."}, {"stem": "Which constitutional protection was established by the 14th Amendment?", "choices": [{"label": "A.", "text": "Abolition of slavery", "correct": false}, {"label": "B.", "text": "Birthright citizenship and equal protection", "correct": true}, {"label": "C.", "text": "Prohibition of poll taxes", "correct": false}, {"label": "D.", "text": "Women’s suffrage", "correct": false}], "hint": "This amendment deals with citizenship, due process, and equality.", "explanation": "The Fourteenth Amendment established birthright citizenship and equal protection under the law."}, {"stem": "The Reconstruction Amendments were originally intended to protect:", "choices": [{"label": "A.", "text": "All minority groups equally", "correct": false}, {"label": "B.", "text": "Former Confederate leaders", "correct": false}, {"label": "C.", "text": "African Americans following the Civil War", "correct": true}, {"label": "D.", "text": "Immigrants arriving in the late 1800s", "correct": false}], "hint": "Think about the immediate aftermath of the Civil War.", "explanation": "The Reconstruction Amendments were created primarily to protect the rights of African Americans after the Civil War."}, {"stem": "Despite these amendments, African Americans continued to face inequality primarily due to:", "choices": [{"label": "A.", "text": "Supreme Court enforcement of segregation", "correct": false}, {"label": "B.", "text": "Jim Crow laws and discriminatory state practices", "correct": true}, {"label": "C.", "text": "Lack of federal legislation", "correct": false}, {"label": "D.", "text": "Economic downturns", "correct": false}], "hint": "The answer is tied to discriminatory laws and practices after Reconstruction.", "explanation": "Jim Crow laws and discriminatory state practices allowed inequality to continue despite the Reconstruction Amendments."}];
 
 const state = {
