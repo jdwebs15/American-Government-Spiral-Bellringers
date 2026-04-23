@@ -72,35 +72,41 @@
         <div class="msg good" style="max-width:760px;margin:0 auto 14px;">
           <strong>Mastery achieved.</strong> Perfect run earned. Show your submit ticket.
         </div>
+
+        <div class="ticket">
+          <h2 style="margin-top:0;">Submit Ticket</h2>
+          <div class="ticket-grid">
+            <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
+            <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
+            <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
+            <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
+            <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
+            <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
+            <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
+            <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">Perfect Run</span></div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
       </div>
 
       <div id="masteryFail" class="hidden">
         <div class="msg bad" style="max-width:760px;margin:0 auto 14px;">
-          <strong>Mastery required.</strong> You must complete the game with 100% accuracy and zero misses to earn a submit ticket.
+          <strong>No ticket issued.</strong> A submit ticket is generated only for a perfect run with zero misses.
         </div>
-      </div>
-
-      <div class="ticket">
-        <h2 style="margin-top:0;">Submit Ticket</h2>
-        <div class="ticket-grid">
-          <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
-          <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
-          <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
-          <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
-          <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
-          <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
-          <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
-          <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">See mastery message above</span></div>
+        <div class="msg warn" style="max-width:760px;margin:0 auto 14px;">
+          Mastery required — restart and complete the game at 100% on the first try for every question.
         </div>
-      </div>
-
-      <div class="btn-row" style="justify-content:center;">
-        <a class="btn secondary" href="../index.html">Back to Hub</a>
-        <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
       </div>
     </section>
-  </div>
-  <script>
+<script>
 const QUESTIONS = [{"stem": "Which process involves two sides adjusting their demands to reach an agreement?", "choices": [{"label": "A.", "text": "Persuasion", "correct": false}, {"label": "B.", "text": "Consensus building", "correct": false}, {"label": "C.", "text": "Compromise", "correct": true}, {"label": "D.", "text": "Negotiation", "correct": false}], "hint": "Both sides give something up to meet in the middle.", "explanation": "Compromise happens when opposing sides adjust demands to reach an agreement."}, {"stem": "Consensus building is best described as:", "choices": [{"label": "A.", "text": "One side winning a debate", "correct": false}, {"label": "B.", "text": "Agreement reached by majority vote only", "correct": false}, {"label": "C.", "text": "Collective agreement supported by the group", "correct": true}, {"label": "D.", "text": "Enforcement of rules", "correct": false}], "hint": "The key is broad group support.", "explanation": "Consensus building aims for collective agreement that the group can support, not just a narrow victory."}, {"stem": "Why are persuasion and negotiation essential in a democratic system?", "choices": [{"label": "A.", "text": "They eliminate conflict", "correct": false}, {"label": "B.", "text": "They allow decisions without laws", "correct": false}, {"label": "C.", "text": "They help resolve differences peacefully", "correct": true}, {"label": "D.", "text": "They replace formal institutions", "correct": false}], "hint": "Democracies need nonviolent ways to handle disagreement.", "explanation": "Persuasion and negotiation help people resolve differences peacefully within democratic processes."}, {"stem": "Which principle is illustrated when citizens give consent to be governed through elections?", "choices": [{"label": "A.", "text": "Limited government", "correct": false}, {"label": "B.", "text": "Federalism", "correct": false}, {"label": "C.", "text": "Popular sovereignty", "correct": true}, {"label": "D.", "text": "Separation of powers", "correct": false}], "hint": "This principle says the people are the source of government power.", "explanation": "Popular sovereignty means government gets its authority from the consent of the governed."}, {"stem": "A government that operates only within powers granted by law reflects the principle of:", "choices": [{"label": "A.", "text": "Checks and balances", "correct": false}, {"label": "B.", "text": "Popular sovereignty", "correct": false}, {"label": "C.", "text": "Limited government", "correct": true}, {"label": "D.", "text": "Federalism", "correct": false}], "hint": "The government is restricted by law.", "explanation": "Limited government means government may act only within the legal powers given to it."}, {"stem": "Dividing power between national and state governments best illustrates:", "choices": [{"label": "A.", "text": "Separation of powers", "correct": false}, {"label": "B.", "text": "Federalism", "correct": true}, {"label": "C.", "text": "Checks and balances", "correct": false}, {"label": "D.", "text": "Rule of law", "correct": false}], "hint": "Think vertical division of power.", "explanation": "Federalism divides governing authority between the national government and the states."}, {"stem": "Which concern was most central to the Anti-Federalist opposition to the Constitution?", "choices": [{"label": "A.", "text": "Lack of a national currency", "correct": false}, {"label": "B.", "text": "Absence of protections for individual liberties", "correct": true}, {"label": "C.", "text": "Weakness of the executive branch", "correct": false}, {"label": "D.", "text": "Excessive power held by state governments", "correct": false}], "hint": "Their biggest fear involved rights and national power.", "explanation": "Anti-Federalists worried the Constitution did not protect individual liberties strongly enough."}, {"stem": "Federalists supported the “necessary and proper” clause primarily because it:", "choices": [{"label": "A.", "text": "Limited Congress to enumerated powers", "correct": false}, {"label": "B.", "text": "Allowed flexibility for the national government to function effectively", "correct": true}, {"label": "C.", "text": "Guaranteed equal power to the states", "correct": false}, {"label": "D.", "text": "Prevented judicial review", "correct": false}], "hint": "They wanted government to have practical flexibility.", "explanation": "Federalists favored the clause because it gave the national government flexibility to carry out its responsibilities."}, {"stem": "The adoption of the Bill of Rights most directly resulted from:", "choices": [{"label": "A.", "text": "Federalist dominance in Congress", "correct": false}, {"label": "B.", "text": "Supreme Court interpretation", "correct": false}, {"label": "C.", "text": "Anti-Federalist demands for limits on national power", "correct": true}, {"label": "D.", "text": "Weaknesses of the Articles of Confederation", "correct": false}], "hint": "It was a compromise tied to ratification fears.", "explanation": "The Bill of Rights was added largely to address Anti-Federalist concerns about limits on national power and protections for liberty."}];
 
 const state = {
