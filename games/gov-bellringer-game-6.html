@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Game 6 — Ohio Government, Civic Participation, & Public Policy</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="game-wrap">
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+
+    <section id="startScreen" class="panel center">
+      <div class="kicker">Legend Mastery Series • Government Bellringer</div>
+      <h1>Game 6 — Ohio Government, Civic Participation, & Public Policy</h1>
+      <p class="sub" style="margin: 0 auto 8px; max-width:760px;">Bell Ringers 16–18 • CS 16–18</p>
+      <div class="pills" style="justify-content:center;">
+        <span class="pill">9 Questions</span>
+        <span class="pill">Perfect Run Required</span>
+        <span class="pill">Auto-Submit</span>
+        <span class="pill">Correct-to-Advance</span>
+      </div>
+      <div class="input-row">
+        <input id="studentName" type="text" placeholder="Enter your name" />
+        <button id="beginBtn" class="btn">Start Game</button>
+      </div>
+      <div id="startError" class="msg bad hidden" style="max-width:520px;margin:14px auto 0;"></div>
+    </section>
+
+    <section id="gameScreen" class="panel hidden">
+      <div class="topbar">
+        <div>
+          <div class="kicker">Government Bellringer Mastery</div>
+          <h1 style="font-size:1.65rem;margin:0;">Game 6 — Ohio Government, Civic Participation, & Public Policy</h1>
+        </div>
+        <button id="restartBtn" class="btn secondary">Hard Reset</button>
+      </div>
+
+      <div class="hud">
+        <div class="hud-card">
+          <div class="hud-label">Progress</div>
+          <div id="hudProgress" class="hud-value">1 / 9</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Accuracy</div>
+          <div id="hudAccuracy" class="hud-value">100%</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Misses</div>
+          <div id="hudMisses" class="hud-value">0</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Runtime</div>
+          <div id="hudTimer" class="hud-value">0:00</div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div id="qMeta" class="small"></div>
+        <div id="qStem" class="stem"></div>
+        <div id="choices" class="choices"></div>
+        <div id="messageBox" class="msg hidden"></div>
+      </div>
+      <div id="errorBox" class="error-box hidden"></div>
+    </section>
+
+    <section id="finishScreen" class="panel hidden center">
+      <div class="kicker">Completion Screen</div>
+      <h1 style="margin-bottom:10px;">Session Complete</h1>
+
+      <div id="masteryPass" class="hidden">
+        <div class="msg good" style="max-width:760px;margin:0 auto 14px;">
+          <strong>Mastery achieved.</strong> Perfect run earned. Show your submit ticket.
+        </div>
+
+        <div class="ticket">
+          <h2 style="margin-top:0;">Submit Ticket</h2>
+          <div class="ticket-grid">
+            <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
+            <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
+            <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
+            <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
+            <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
+            <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
+            <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
+            <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">Perfect Run</span></div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
+      </div>
+
+      <div id="masteryFail" class="hidden">
+        <div class="msg bad" style="max-width:760px;margin:0 auto 14px;">
+          <strong>No ticket issued.</strong> A submit ticket is generated only for a perfect run with zero misses.
+        </div>
+        <div class="msg warn" style="max-width:760px;margin:0 auto 14px;">
+          Mastery required — restart and complete the game at 100% on the first try for every question.
+        </div>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+const QUESTIONS = [{"stem": "One similarity between the Ohio Constitution and the U.S. Constitution is that both:", "choices": [{"label": "A.", "text": "Require judges to be elected", "correct": false}, {"label": "B.", "text": "Allow citizen initiatives at the national level", "correct": false}, {"label": "C.", "text": "Establish three branches of government", "correct": true}, {"label": "D.", "text": "Impose legislative term limits", "correct": false}], "hint": "Focus on a shared structural feature.", "explanation": "Both constitutions establish legislative, executive, and judicial branches."}, {"stem": "Which feature is unique to the Ohio Constitution?", "choices": [{"label": "A.", "text": "Separation of powers", "correct": false}, {"label": "B.", "text": "A bill of rights", "correct": false}, {"label": "C.", "text": "Citizen initiative and referendum", "correct": true}, {"label": "D.", "text": "Checks and balances", "correct": false}], "hint": "This gives citizens a more direct role in state policymaking.", "explanation": "The Ohio Constitution includes initiative and referendum, which are not part of the U.S. Constitution."}, {"stem": "A major purpose of the 1851 Ohio Constitution was to:", "choices": [{"label": "A.", "text": "Strengthen federal authority", "correct": false}, {"label": "B.", "text": "Improve the ability to govern the state", "correct": true}, {"label": "C.", "text": "Eliminate judicial elections", "correct": false}, {"label": "D.", "text": "Reduce citizen participation", "correct": false}], "hint": "The change was aimed at better state governance.", "explanation": "The 1851 Ohio Constitution was designed to improve how the state could be governed."}, {"stem": "Which activity best represents civic involvement at the state level in Ohio?", "choices": [{"label": "A.", "text": "Serving on a local school board", "correct": false}, {"label": "B.", "text": "Voting in a gubernatorial election", "correct": true}, {"label": "C.", "text": "Attending a city council meeting", "correct": false}, {"label": "D.", "text": "Joining a neighborhood watch", "correct": false}], "hint": "Choose the option tied directly to statewide government.", "explanation": "Voting in a gubernatorial election is direct participation in Ohio state government."}, {"stem": "Organizing a community cleanup project is an example of civic participation at the:", "choices": [{"label": "A.", "text": "Federal level", "correct": false}, {"label": "B.", "text": "State level", "correct": false}, {"label": "C.", "text": "Local level", "correct": true}, {"label": "D.", "text": "Judicial level", "correct": false}], "hint": "This kind of participation is rooted in the immediate community.", "explanation": "Community cleanup projects are examples of local civic participation."}, {"stem": "Why is citizen involvement important at state and local levels of government?", "choices": [{"label": "A.", "text": "It replaces the need for elected officials", "correct": false}, {"label": "B.", "text": "It helps governments address community problems", "correct": true}, {"label": "C.", "text": "It limits the power of the federal government", "correct": false}, {"label": "D.", "text": "It ensures uniform policies nationwide", "correct": false}], "hint": "Participation helps communities solve their own issues.", "explanation": "Citizen involvement helps state and local governments respond to community needs and problems."}, {"stem": "Public policy issues are best described as:", "choices": [{"label": "A.", "text": "Laws passed by Congress only", "correct": false}, {"label": "B.", "text": "Matters of discussion and debate related to government functions", "correct": true}, {"label": "C.", "text": "Court decisions interpreting the Constitution", "correct": false}, {"label": "D.", "text": "Informal citizen actions", "correct": false}], "hint": "The definition is broader than one branch or one action.", "explanation": "Public policy issues are matters of discussion and debate connected to how government functions."}, {"stem": "Which entity best illustrates the federal executive branch addressing public policy?", "choices": [{"label": "A.", "text": "Congressional Budget Office", "correct": false}, {"label": "B.", "text": "Ohio Legislative Service Commission", "correct": false}, {"label": "C.", "text": "Department of State", "correct": true}, {"label": "D.", "text": "Ohio Courts of Common Pleas", "correct": false}], "hint": "Look for a federal executive department.", "explanation": "The Department of State is part of the federal executive branch and helps carry out public policy."}, {"stem": "Public policy issues often involve multiple levels of government because:", "choices": [{"label": "A.", "text": "The Constitution requires cooperation", "correct": false}, {"label": "B.", "text": "Issues are simple and limited in scope", "correct": false}, {"label": "C.", "text": "Collaboration or conflict may occur across branches and levels", "correct": true}, {"label": "D.", "text": "Federal authority always overrides state authority", "correct": false}], "hint": "These issues frequently cross boundaries and responsibilities.", "explanation": "Public policy often involves multiple levels because branches and governments may collaborate or conflict over the issue."}];
+
+const state = {
+  idx: 0,
+  misses: 0,
+  locked: false,
+  startedAt: null,
+  endedAt: null,
+  studentName: "",
+};
+
+const $ = (id) => document.getElementById(id);
+
+function now(){
+  return new Date();
+}
+function formatTime(d){
+  return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', second:'2-digit'});
+}
+function formatDate(d){
+  return d.toLocaleDateString();
+}
+function elapsedMs(){
+  if(!state.startedAt) return 0;
+  const end = state.endedAt || now();
+  return end - state.startedAt;
+}
+function formatElapsed(ms){
+  const total = Math.floor(ms / 1000);
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  if(h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+function accuracy(){
+  const attempted = state.idx + state.misses;
+  if(attempted <= 0) return 100;
+  const correctFirstTry = state.idx;
+  return Math.round((correctFirstTry / attempted) * 100);
+}
+function updateHud(){
+  $('hudProgress').textContent = `${Math.min(state.idx + 1, QUESTIONS.length)} / ${QUESTIONS.length}`;
+  $('hudAccuracy').textContent = `${accuracy()}%`;
+  $('hudMisses').textContent = `${state.misses}`;
+  $('hudTimer').textContent = formatElapsed(elapsedMs());
+}
+function startTimer(){
+  setInterval(() => {
+    if (state.startedAt && !state.endedAt) updateHud();
+  }, 250);
+}
+function startGame(){
+  const name = $('studentName').value.trim();
+  if(!name){
+    $('startError').classList.remove('hidden');
+    $('startError').textContent = 'Enter your name to begin.';
+    return;
+  }
+  state.studentName = name;
+  state.startedAt = now();
+  $('startScreen').classList.add('hidden');
+  $('gameScreen').classList.remove('hidden');
+  renderQuestion();
+}
+function renderQuestion(){
+  updateHud();
+  const q = QUESTIONS[state.idx];
+  $('qMeta').textContent = `Question ${state.idx + 1} of ${QUESTIONS.length}`;
+  $('qStem').textContent = q.stem;
+  $('messageBox').className = 'msg hidden';
+  $('messageBox').textContent = '';
+  const choices = $('choices');
+  choices.innerHTML = '';
+  q.choices.forEach((choice, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.innerHTML = `<strong>${choice.label}</strong> ${choice.text}`;
+    btn.addEventListener('click', () => handleChoice(i, btn));
+    choices.appendChild(btn);
+  });
+}
+function disableChoices(){
+  [...document.querySelectorAll('.choice')].forEach(btn => btn.disabled = true);
+}
+function showMsg(kind, html){
+  const box = $('messageBox');
+  box.className = `msg ${kind}`;
+  box.innerHTML = html;
+}
+function handleChoice(choiceIndex, btn){
+  if(state.locked) return;
+  state.locked = true;
+  const q = QUESTIONS[state.idx];
+  const correctIndex = q.choices.findIndex(c => c.correct);
+
+  if(choiceIndex === correctIndex){
+    btn.classList.add('correct');
+    disableChoices();
+    showMsg('good', `<strong>Correct.</strong> ${q.explanation}`);
+    setTimeout(() => {
+      state.idx += 1;
+      state.locked = false;
+      if(state.idx >= QUESTIONS.length){
+        finishGame();
+      } else {
+        renderQuestion();
+      }
+    }, 5000);
+  } else {
+    btn.classList.add('incorrect');
+    state.misses += 1;
+    updateHud();
+    showMsg('bad', `<strong>Not yet.</strong> ${q.hint}<br><span class="notice">Your accuracy has been reduced. Choose again to continue.</span>`);
+    state.locked = false;
+  }
+}
+function finishGame(){
+  state.endedAt = now();
+  $('gameScreen').classList.add('hidden');
+  $('finishScreen').classList.remove('hidden');
+
+  $('finalName').textContent = state.studentName;
+  $('finalDate').textContent = formatDate(state.endedAt);
+  $('finalStart').textContent = formatTime(state.startedAt);
+  $('finalEnd').textContent = formatTime(state.endedAt);
+  $('finalRuntime').textContent = formatElapsed(elapsedMs());
+  $('finalAccuracy').textContent = `${accuracy()}%`;
+  $('finalMisses').textContent = `${state.misses}`;
+
+  if(state.misses === 0){
+    $('masteryPass').classList.remove('hidden');
+    $('masteryFail').classList.add('hidden');
+  } else {
+    $('masteryPass').classList.add('hidden');
+    $('masteryFail').classList.remove('hidden');
+  }
+}
+function restartGame(){
+  window.location.reload();
+}
+window.addEventListener('error', (e) => {
+  const box = $('errorBox');
+  if(box){
+    box.classList.remove('hidden');
+    box.textContent = `Error: ${e.message}\n${e.filename}:${e.lineno}`;
+  }
+});
+window.addEventListener('DOMContentLoaded', () => {
+  startTimer();
+  updateHud();
+  $('beginBtn').addEventListener('click', startGame);
+  $('restartBtn').addEventListener('click', restartGame);
+  $('restartBtn2').addEventListener('click', restartGame);
+});
+</script>
+</body>
+</html>
