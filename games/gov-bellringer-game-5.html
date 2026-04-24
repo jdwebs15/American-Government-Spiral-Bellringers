@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Game 5 — Checks, Rights, & Minority Protections</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="game-wrap">
+    <a class="back-link" href="../index.html">← Back to Hub</a>
+
+    <section id="startScreen" class="panel center">
+      <div class="kicker">Legend Mastery Series • Government Bellringer</div>
+      <h1>Game 5 — Checks, Rights, & Minority Protections</h1>
+      <p class="sub" style="margin: 0 auto 8px; max-width:760px;">Bell Ringers 13–15 • CS 13–15</p>
+      <div class="pills" style="justify-content:center;">
+        <span class="pill">9 Questions</span>
+        <span class="pill">Perfect Run Required</span>
+        <span class="pill">Auto-Submit</span>
+        <span class="pill">Correct-to-Advance</span>
+      </div>
+      <div class="input-row">
+        <input id="studentName" type="text" placeholder="Enter your name" />
+        <button id="beginBtn" class="btn">Start Game</button>
+      </div>
+      <div id="startError" class="msg bad hidden" style="max-width:520px;margin:14px auto 0;"></div>
+    </section>
+
+    <section id="gameScreen" class="panel hidden">
+      <div class="topbar">
+        <div>
+          <div class="kicker">Government Bellringer Mastery</div>
+          <h1 style="font-size:1.65rem;margin:0;">Game 5 — Checks, Rights, & Minority Protections</h1>
+        </div>
+        <button id="restartBtn" class="btn secondary">Hard Reset</button>
+      </div>
+
+      <div class="hud">
+        <div class="hud-card">
+          <div class="hud-label">Progress</div>
+          <div id="hudProgress" class="hud-value">1 / 9</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Accuracy</div>
+          <div id="hudAccuracy" class="hud-value">100%</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Misses</div>
+          <div id="hudMisses" class="hud-value">0</div>
+        </div>
+        <div class="hud-card">
+          <div class="hud-label">Runtime</div>
+          <div id="hudTimer" class="hud-value">0:00</div>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div id="qMeta" class="small"></div>
+        <div id="qStem" class="stem"></div>
+        <div id="choices" class="choices"></div>
+        <div id="messageBox" class="msg hidden"></div>
+      </div>
+      <div id="errorBox" class="error-box hidden"></div>
+    </section>
+
+    <section id="finishScreen" class="panel hidden center">
+      <div class="kicker">Completion Screen</div>
+      <h1 style="margin-bottom:10px;">Session Complete</h1>
+
+      <div id="masteryPass" class="hidden">
+        <div class="msg good" style="max-width:760px;margin:0 auto 14px;">
+          <strong>Mastery achieved.</strong> Perfect run earned. Show your submit ticket.
+        </div>
+
+        <div class="ticket">
+          <h2 style="margin-top:0;">Submit Ticket</h2>
+          <div class="ticket-grid">
+            <div class="ticket-item"><strong>Name</strong><br><span id="finalName"></span></div>
+            <div class="ticket-item"><strong>Date</strong><br><span id="finalDate"></span></div>
+            <div class="ticket-item"><strong>Start Time</strong><br><span id="finalStart"></span></div>
+            <div class="ticket-item"><strong>End Time</strong><br><span id="finalEnd"></span></div>
+            <div class="ticket-item"><strong>Runtime</strong><br><span id="finalRuntime"></span></div>
+            <div class="ticket-item"><strong>Accuracy</strong><br><span id="finalAccuracy"></span></div>
+            <div class="ticket-item"><strong>Misses</strong><br><span id="finalMisses"></span></div>
+            <div class="ticket-item"><strong>Result</strong><br><span id="finalResult">Perfect Run</span></div>
+          </div>
+        </div>
+
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
+      </div>
+
+      <div id="masteryFail" class="hidden">
+        <div class="msg bad" style="max-width:760px;margin:0 auto 14px;">
+          <strong>No ticket issued.</strong> A submit ticket is generated only for a perfect run with zero misses.
+        </div>
+        <div class="msg warn" style="max-width:760px;margin:0 auto 14px;">
+          Mastery required — restart and complete the game at 100% on the first try for every question.
+        </div>
+        <div class="btn-row" style="justify-content:center;">
+          <a class="btn secondary" href="../index.html">Back to Hub</a>
+          <button id="restartBtn2" class="btn">Restart for Mastery</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+<script>
+const QUESTIONS = [{"stem":"Congress overriding a presidential veto is an example of:","choices":[{"label":"A.","text":"Judicial review","correct":false},{"label":"B.","text":"Federalism","correct":false},{"label":"C.","text":"Checks and balances","correct":true},{"label":"D.","text":"Separation of powers","correct":false}],"hint":"One branch is checking the power of another branch.","explanation":"Overriding a veto is a classic example of checks and balances between branches."},{"stem":"Which action allows the judicial branch to check Congress?","choices":[{"label":"A.","text":"Confirming appointments","correct":false},{"label":"B.","text":"Declaring laws unconstitutional","correct":true},{"label":"C.","text":"Proposing amendments","correct":false},{"label":"D.","text":"Passing legislation","correct":false}],"hint":"Courts use constitutional review, not lawmaking.","explanation":"The judicial branch checks Congress by declaring laws unconstitutional."},{"stem":"Which factor can most directly affect how the branches interact on public policy?","choices":[{"label":"A.","text":"Population size","correct":false},{"label":"B.","text":"Interest group involvement","correct":true},{"label":"C.","text":"Geographic location","correct":false},{"label":"D.","text":"Constitutional amendments only","correct":false}],"hint":"Think about outside influence on policymaking.","explanation":"Interest groups can influence how branches interact and respond on public policy issues."},{"stem":"Which right is most directly related to participation in the political process?","choices":[{"label":"A.","text":"Protection from unreasonable searches","correct":false},{"label":"B.","text":"Freedom of speech","correct":true},{"label":"C.","text":"Right to private property","correct":false},{"label":"D.","text":"Right to bear arms","correct":false}],"hint":"This right allows citizens to express political ideas publicly.","explanation":"Freedom of speech is central to participating in the political process."},{"stem":"Serving on a jury is best described as:","choices":[{"label":"A.","text":"An optional privilege","correct":false},{"label":"B.","text":"A civic responsibility connected to individual rights","correct":true},{"label":"C.","text":"A judicial power","correct":false},{"label":"D.","text":"A form of public policy","correct":false}],"hint":"It is part of citizenship and helps protect fair trials.","explanation":"Jury service is a civic responsibility that supports the justice system and individual rights."},{"stem":"The doctrine of incorporation is significant because it:","choices":[{"label":"A.","text":"Applies state laws to the federal government","correct":false},{"label":"B.","text":"Extends most Bill of Rights protections to the states","correct":true},{"label":"C.","text":"Limits Supreme Court authority","correct":false},{"label":"D.","text":"Eliminates state constitutions","correct":false}],"hint":"Think about applying rights protections beyond the national level.","explanation":"Incorporation used the Fourteenth Amendment to apply most Bill of Rights protections to the states."},{"stem":"Historically, which factor most often led to the denial of civil rights for minority groups in the United States?","choices":[{"label":"A.","text":"Weak state governments","correct":false},{"label":"B.","text":"Majority rule without protections for minority rights","correct":true},{"label":"C.","text":"Lack of constitutional amendments","correct":false},{"label":"D.","text":"Excessive judicial power","correct":false}],"hint":"The problem comes when the majority is unchecked.","explanation":"Minority rights have often been denied when majority rule operated without strong protections."},{"stem":"Which action best illustrates the legislative branch extending civil rights to marginalized groups?","choices":[{"label":"A.","text":"Declaring laws unconstitutional","correct":false},{"label":"B.","text":"Enacting civil rights and voting rights acts","correct":true},{"label":"C.","text":"Deploying federal troops","correct":false},{"label":"D.","text":"Incorporating the Bill of Rights","correct":false}],"hint":"This branch extends rights through statutory law.","explanation":"Congress has expanded civil rights through legislation such as civil rights and voting rights acts."},{"stem":"The Doctrine of Incorporation has primarily been used by which branch of government?","choices":[{"label":"A.","text":"Legislative","correct":false},{"label":"B.","text":"Executive","correct":false},{"label":"C.","text":"Judicial","correct":true},{"label":"D.","text":"State","correct":false}],"hint":"This doctrine developed through court interpretation.","explanation":"The doctrine of incorporation has been developed and applied primarily by the judicial branch."}];
+
+const state = { idx: 0, misses: 0, locked: false, startedAt: null, endedAt: null, studentName: "" };
+const $ = (id) => document.getElementById(id);
+
+function now(){ return new Date(); }
+function formatTime(d){ return d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit', second:'2-digit'}); }
+function formatDate(d){ return d.toLocaleDateString(); }
+function elapsedMs(){ if(!state.startedAt) return 0; const end = state.endedAt || now(); return end - state.startedAt; }
+function formatElapsed(ms){ const total = Math.floor(ms / 1000); const h = Math.floor(total / 3600); const m = Math.floor((total % 3600) / 60); const s = total % 60; if(h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; return `${m}:${String(s).padStart(2,'0')}`; }
+function accuracy(){ const attempted = state.idx + state.misses; if(attempted <= 0) return 100; const correctFirstTry = state.idx; return Math.round((correctFirstTry / attempted) * 100); }
+function updateHud(){ $('hudProgress').textContent = `${Math.min(state.idx + 1, QUESTIONS.length)} / ${QUESTIONS.length}`; $('hudAccuracy').textContent = `${accuracy()}%`; $('hudMisses').textContent = `${state.misses}`; $('hudTimer').textContent = formatElapsed(elapsedMs()); }
+function startTimer(){ setInterval(() => { if (state.startedAt && !state.endedAt) updateHud(); }, 250); }
+function startGame(){ const name = $('studentName').value.trim(); if(!name){ $('startError').classList.remove('hidden'); $('startError').textContent = 'Enter your name to begin.'; return; } state.studentName = name; state.startedAt = now(); $('startScreen').classList.add('hidden'); $('gameScreen').classList.remove('hidden'); renderQuestion(); }
+function renderQuestion(){ updateHud(); const q = QUESTIONS[state.idx]; $('qMeta').textContent = `Question ${state.idx + 1} of ${QUESTIONS.length}`; $('qStem').textContent = q.stem; $('messageBox').className = 'msg hidden'; $('messageBox').textContent = ''; const choices = $('choices'); choices.innerHTML = ''; q.choices.forEach((choice, i) => { const btn = document.createElement('button'); btn.className = 'choice'; btn.innerHTML = `<strong>${choice.label}</strong> ${choice.text}`; btn.addEventListener('click', () => handleChoice(i, btn)); choices.appendChild(btn); }); }
+function disableChoices(){ [...document.querySelectorAll('.choice')].forEach(btn => btn.disabled = true); }
+function showMsg(kind, html){ const box = $('messageBox'); box.className = `msg ${kind}`; box.innerHTML = html; }
+function handleChoice(choiceIndex, btn){ if(state.locked) return; state.locked = true; const q = QUESTIONS[state.idx]; const correctIndex = q.choices.findIndex(c => c.correct); if(choiceIndex === correctIndex){ btn.classList.add('correct'); disableChoices(); showMsg('good', `<strong>Correct.</strong> ${q.explanation}`); setTimeout(() => { state.idx += 1; state.locked = false; if(state.idx >= QUESTIONS.length){ finishGame(); } else { renderQuestion(); } }, 5000); } else { btn.classList.add('incorrect'); state.misses += 1; updateHud(); showMsg('bad', `<strong>Not yet.</strong> ${q.hint}<br><span class="notice">Your accuracy has been reduced. Choose again to continue.</span>`); state.locked = false; } }
+function finishGame(){ state.endedAt = now(); $('gameScreen').classList.add('hidden'); $('finishScreen').classList.remove('hidden'); $('finalName').textContent = state.studentName; $('finalDate').textContent = formatDate(state.endedAt); $('finalStart').textContent = formatTime(state.startedAt); $('finalEnd').textContent = formatTime(state.endedAt); $('finalRuntime').textContent = formatElapsed(elapsedMs()); $('finalAccuracy').textContent = `${accuracy()}%`; $('finalMisses').textContent = `${state.misses}`; if(state.misses === 0){ $('masteryPass').classList.remove('hidden'); $('masteryFail').classList.add('hidden'); } else { $('masteryPass').classList.add('hidden'); $('masteryFail').classList.remove('hidden'); } }
+function restartGame(){ window.location.reload(); }
+window.addEventListener('error', (e) => { const box = $('errorBox'); if(box){ box.classList.remove('hidden'); box.textContent = `Error: ${e.message}\n${e.filename}:${e.lineno}`; }});
+window.addEventListener('DOMContentLoaded', () => { startTimer(); updateHud(); $('beginBtn').addEventListener('click', startGame); $('restartBtn').addEventListener('click', restartGame); $('restartBtn2').addEventListener('click', restartGame); });
+</script>
+</body>
+</html>
